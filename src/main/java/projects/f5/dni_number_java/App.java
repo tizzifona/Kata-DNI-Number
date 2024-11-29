@@ -1,17 +1,14 @@
 package projects.f5.dni_number_java;
 
-/**
- * Hello world!
- */
-public final class App {
-    private App() {
-    }
+import projects.f5.dni_number_java.controller.DNIController;
+import projects.f5.dni_number_java.model.DNIModel;
+import projects.f5.dni_number_java.view.DNIView;
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
+public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        DNIModel model = new DNIModel();
+        DNIView view = new DNIView();
+        DNIController controller = new DNIController(model, view);
+        controller.run();
     }
 }

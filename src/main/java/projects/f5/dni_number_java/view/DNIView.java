@@ -17,7 +17,7 @@ public class DNIView {
     }
 
     public void displayNIF(int dniNumber, char nifLetter) {
-        System.out.println("--------------------------");
+        System.out.println("-----------------------------------");
         System.out.println("Your NIF is: " + dniNumber + "-" + nifLetter + "\n");
     }
 
