@@ -43,4 +43,27 @@ public class DNIControllerTest {
         verify(model, times(1)).calculateNIFLetter(validDNI);
         verify(view, times(1)).displayNIF(validDNI, expectedNIFLetter);
     }
+
+    @Test
+    void testInvalidInput() {
+        int invalidDNI = -1;
+        String errorMessage = "DNI number must be between 0 and 99999999";
+        int validDNI = 12345678;
+        char expectedNIFLetter = 'Z';
+
+        when(view.getDNINumber())
+                .thenReturn(invalidDNI)
+                .thenReturn(validDNI);
+        when(model.calculateNIFLetter(invalidDNI)).thenThrow(new IllegalArgumentException(errorMessage));
+        when(model.calculateNIFLetter(validDNI)).thenReturn(expectedNIFLetter);
+
+        controller.run();
+
+        verify(view, times(2)).getDNINumber();
+        verify(model, times(1)).calculateNIFLetter(invalidDNI);
+        verify(view, times(1)).displayError(errorMessage);
+        verify(model, times(1)).calculateNIFLetter(validDNI);
+        verify(view, times(1)).displayNIF(validDNI, expectedNIFLetter);
+    }
+
 }
